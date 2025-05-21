@@ -1,1 +1,17 @@
-<p>change-detection works!</p>
+<button (click)="onDoSomethingClick()">Do stuff ({{totalCount$()}})</button>
+@for (item of store.collectionData(); track item.id) {
+    <p [ngStyle]="{'color': item.color}">{{ item | json }}</p>
+}
+
+@if (store.data() != null) {
+    <h1>{{ store.fullName() }}</h1>
+    @if (store.isLoading()) {
+        <p>Loading...</p>
+    }
+    @if (store.error() != null) {
+        <p>Error: {{ store.error() }}</p>
+    } 
+    @else {
+        <p [ngStyle]="{'background-color': store.data().color }">{{ store.data() | json }}</p>
+    }
+}
